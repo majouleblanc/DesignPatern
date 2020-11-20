@@ -8,21 +8,28 @@ namespace AbstractFactory
     class Application
     {
         private readonly IGuiFactory _factory;
-
+        private IButton _button;
+        private ICheckbox _checkbox;
 
         public Application(IGuiFactory factory)
         {
             _factory = factory;
         }
 
+        public void CreateUI()
+        {
+            _button = _factory.CreateButton();
+            _checkbox = _factory.CreateCheckbox();
+        }
+
         public void Run()
         {
-            var button = _factory.CreateButton();
-            button.paint();
+            CreateUI();
+
+            _button.paint();
             Console.WriteLine();
 
-            var checkbox = _factory.CreateButton();
-            checkbox.paint();
+            _checkbox.paint();
             Console.WriteLine();
         }
     }
